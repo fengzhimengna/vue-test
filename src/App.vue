@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="content">
     <img src="./assets/logo.png">
     <hello></hello>
   </div>
@@ -9,7 +9,7 @@
 import Hello from './components/Hello'
 
 export default {
-  name: 'app',
+  name: 'content',
   components: {
     Hello
   }
@@ -17,12 +17,12 @@ export default {
 </script>
 
 <style>
-#app {
+#content {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-left: 160px;
 }
 </style>
