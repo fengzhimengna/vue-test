@@ -1,28 +1,37 @@
 <template>
-  <div id="content">
-    <img src="./assets/logo.png">
-    <hello></hello>
+  <div id="cms">
+    
+    <main-content></main-content>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import MainContent from './components/Hello'
 
 export default {
-  name: 'content',
+  name: 'cms',
   components: {
-    Hello
+    MainContent
   }
 }
 </script>
 
 <style>
-#content {
+body{
+  margin: 0;
+  padding: 0;
+  margin-top: -20px;
+}
+#cms {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 160px;
+  width: 100%;
+  margin-top: 0px;
+  position: relative;
 }
+
+
 </style>

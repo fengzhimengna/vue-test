@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "url": "/",
+    "displayName": "首页"
+  },
+  {
+    "id": 2,
+    "url": "/user",
+    "displayName": "列表"
+  },
+  {
+    "id": 3,
+    "url": "/foo",
+    "displayName": "foo"
+  },
+  {
+    "id": 4,
+    "url": "/bar/3",
+    "displayName": "bar"
+  }
+]
+
