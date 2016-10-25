@@ -1,16 +1,19 @@
 <template>
   <div >
 	<div id="header">
-	  <img src="../assets/logo.png">
-	  <h2>头部
-	  <span style="float:right;margin-right:10px;">{{username}}</span>
+	  <img src="../assets/logo2.png">
+	  <h2>华泰德丰后台内容管理系统
+	  <span style="float:right;margin-right:10px;">您好，{{username}}</span>
 	  </h2>
 	</div>
 	<div id="nav">
-	  {{error}}
-	  <ul >
-		<li v-for="item in menuList"><router-link :to='item.url' exact>{{ item.displayName }}</router-link></li>
-	  </ul>
+	  <el-menu default-active="" class="el-menu-vertical-demo" theme="light" router>
+      <el-submenu v-for="item in menuList" v-bind:index='item.name' v-if='item.children != null' >
+	    <template slot="title">{{ item.displayName }}</template>
+		<el-menu-item v-for="child in item.children" v-bind:index='child.url'>{{child.displayName}}</el-menu-item>
+	  </el-submenu>
+	  <el-menu-item v-for="item in menuList" v-bind:index='item.url' v-if='item.children == null' >{{ item.displayName }}</el-menu-item>
+    </el-menu>
 	</div>
 	<div id="main">
 	  <transition name="fade" mode="out-in">
@@ -36,16 +39,18 @@ export default {
     fetchData () {
       this.error = null
       this.loading = true
-      this.$http.get('static/menu.json').then((response) => {
+      this.$http.get('http://localhost:8081/static/menu.json').then((response) => {
         console.log(response.data)
         if (response.ok) {
           this.username = 'admin'
           this.menuList = response.data
-          console.log(typeof this.menuList[0].exact)
         }
       }, (response) => {
         this.error = new Error('Post not found.')
       })
+    },
+    handleopen () {
+      console.log('dds')
     }
   }
 }
@@ -62,11 +67,10 @@ export default {
 	font-size: 15px;
 	color: #fffaf3;
 	font-weight: bold;
-	background-color: #f9c81e;
+	background-color: #20a0ff;
 }
 #header img{
-	width: 70px;
-    float: left;
+	float: left;
 	display: inline-block;
 	position: relative;
     padding: 5px;
@@ -81,21 +85,15 @@ export default {
 	font-size: 15px;
 	color: #ffffff;
 	font-weight: bold;
-	background-color: #cecece;
+	background-color: #eff2f7;
 	position: absolute;
 }
 #main{
 	margin-left: 160px;
-	text-align: center;
-	line-height: 280px;
-	font-size: 15px;
-	color: #f9c81e;
-	font-weight: bold;
-	background-color: #fffaf3;
 }
 #main .view{
     border-bottom: green;
-    border-style: solid;	
+    border-style: solid;
 }
 
 h1, h2 {
@@ -105,21 +103,6 @@ h1, h2 {
 ul {
   list-style-type: none;
   padding: 0;
-}
-
-a {
-  color: #42b983;
-  display: inline-block;
-  padding: 10px;
-  margin: 10px 10px;
-}
-a:hover{
-	background-color: #42b983;
-    color: white;
-}
-a.active{
-	background-color: #42b983;
-    color: white;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
