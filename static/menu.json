@@ -6,8 +6,15 @@
   },
   {
     "id": 2,
-    "url": "/user",
-    "displayName": "列表"
+    "name": "/user",
+    "displayName": "列表",
+	"children": [
+	  {
+	    "id": 21,
+        "url": "/user?currentPage=3&totalCount=60",
+        "displayName": "列表1-2"
+	  }
+	]
   },
   {
     "id": 3,
@@ -16,7 +23,7 @@
   },
   {
     "id": 4,
-    "url": "/bar/3",
+    "url": "/bar",
     "displayName": "bar"
   }
 ]
