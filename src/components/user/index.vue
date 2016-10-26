@@ -29,6 +29,7 @@
 
 <script>
 import pagination from '../pagination'
+import router from '../../routers'
 
 export default {
   components: {
@@ -62,7 +63,7 @@ export default {
     },
     add () {
       console.log(this.$route)
-      this.$route.path = 'http://localhost:8081/user/add'
+      router.push('/user/add')
     }
   }
 }

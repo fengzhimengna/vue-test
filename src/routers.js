@@ -1,3 +1,8 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
 const User = {
   template: `
     <div class="user">
@@ -6,7 +11,7 @@ const User = {
   `
 }
 
-export default [{
+const routerConfig = [{
   path: '/',
   component: require('./components/index')
 }, {
@@ -27,3 +32,31 @@ export default [{
   path: '*',
   component: require('./components/index')
 }]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: __dirname,
+  linkActiveClass: 'active',
+  routes: routerConfig
+})
+
+let indexScrollTop = 0
+router.beforeEach((route, redirect, next) => {
+  if (route.path !== '/') {
+    indexScrollTop = document.body.scrollTop
+  }
+  document.title = route.meta.title || document.title
+  next()
+})
+
+router.afterEach(route => {
+  if (route.path !== '/') {
+    document.body.scrollTop = 0
+  } else {
+    Vue.nextTick(() => {
+      document.body.scrollTop = indexScrollTop
+    })
+  }
+})
+
+export default router
