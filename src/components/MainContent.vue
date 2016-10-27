@@ -40,7 +40,6 @@ export default {
       this.error = null
       this.loading = true
       this.$http.get('http://localhost:8081/static/menu.json').then((response) => {
-        console.log(response.data)
         if (response.ok) {
           this.username = 'admin'
           this.menuList = response.data
@@ -48,9 +47,6 @@ export default {
       }, (response) => {
         this.error = new Error('Post not found.')
       })
-    },
-    handleopen () {
-      console.log('dds')
     }
   }
 }

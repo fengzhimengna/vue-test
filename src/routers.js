@@ -19,7 +19,7 @@ const routerConfig = [{
   component: User,
   children: [
     {
-      path: '', component: require('./components/user/index')
+      path: 'index', component: require('./components/user/index')
     },
     {
       path: 'add', component: require('./components/user/add')

@@ -1,22 +1,14 @@
-import reqwest from 'reqwest'
-
-const domain = 'http://api.myriptide.com/wow/'
-
+var reqwest = require('reqwest')
+// const basePath = 'http://www.defengenong.com:8090/module/task/getCity.html?parentId=510000&levelType=2'
+const basePath = 'http://localhost:8081/static'
+// const basePath = 'https://api.github.com/users/github'
 export default {
-  getDate (callback) {
+  getDate (url, callback) {
     reqwest({
-      url: `${domain}date`,
+      url: `${basePath}/${url}`,
       crossOrigin: true
     })
-    .then(val => callback(null, val))
-    .catch(e => callback(e))
-  },
-  getLaddar (region, laddar, callback) {
-    reqwest({
-      url: `${domain}${region}/${laddar}`,
-      crossOrigin: true
-    })
-    .then(val => callback(null, val))
-    .catch(e => callback(e))
+      .then(val => callback(null, val))
+      .catch(e => callback(e))
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <div id="cms">
-    
+
     <main-content></main-content>
   </div>
 </template>
 
 <script>
-import MainContent from './components/Hello'
+import MainContent from './components/MainContent'
 
 export default {
   name: 'cms',

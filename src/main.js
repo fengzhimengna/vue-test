@@ -15,5 +15,5 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#my-app')
+}).$mount('#cms-app')
 
