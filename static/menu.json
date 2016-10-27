@@ -11,7 +11,7 @@
 	"children": [
 	  {
 	    "id": 21,
-        "url": "/user?currentPage=3&totalCount=60",
+        "url": "/user/index",
         "displayName": "列表1-2"
 	  }
 	]
