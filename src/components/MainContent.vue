@@ -3,7 +3,8 @@
 	<div id="header">
 	  <img src="../assets/logo2.png">
 	  <h2>华泰德丰后台内容管理系统
-	  <span style="float:right;margin-right:10px;">您好，{{username}}</span>
+	    <span style="float:right;margin-right:10px;"> <router-link to="/login" style="color: #ffffff">登录</router-link>
+      <button @click="setLoginName">设置用户名</button>您好，{{username}}</span>
 	  </h2>
 	</div>
 	<div id="nav">
@@ -24,32 +25,45 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      menuList: [],
-      error: null,
-      username: null
-    }
-  },
-  created () {
-    this.fetchData()
-  },
-  methods: {
-    fetchData () {
-      this.error = null
-      this.loading = true
-      this.$http.get('http://localhost:8081/static/menu.json').then((response) => {
-        if (response.ok) {
-          this.username = 'admin'
-          this.menuList = response.data
-        }
-      }, (response) => {
-        this.error = new Error('Post not found.')
-      })
+  import api from '../api/backstage'
+  import {setUsername} from '../vuex/actions/user_actions'
+  export default {
+    vuex: {
+      getters: {
+        loginName: (userInfo) => { return userInfo.loginName }
+      },
+      actions: {
+        setUsername
+      }
+    },
+    data () {
+      return {
+        menuList: [],
+        error: null,
+        username: null
+      }
+    },
+    created () {
+      this.fetchData()
+    },
+    methods: {
+      fetchData () {
+        this.error = null
+        this.loading = true
+        api.getMenu('menu.json', (error, data) => {
+          if (error) {
+            console.log(error)
+          } else {
+            this.username = 'admin'
+            this.menuList = data
+          }
+        })
+      },
+      setLoginName () {
+        this.setUsername()
+      }
     }
   }
-}
 
 </script>
 
@@ -76,16 +90,16 @@ export default {
 	width: 160px;
 	float: left;
 	height: 100%;
-	padding-bottom: -80px;
 	text-align: center;
 	font-size: 15px;
 	color: #ffffff;
 	font-weight: bold;
 	background-color: #eff2f7;
-	position: absolute;
+  position: fixed;
 }
 #main{
 	margin-left: 160px;
+  position: relative;
 }
 #main .view{
     border-bottom: green;

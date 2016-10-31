@@ -19,25 +19,16 @@
       }
     },
     created () {
-      this.handleCurrentChange()
+      this.handleCurrentChange(1)
     },
     methods: {
       handleSizeChange (val) {
         console.log(`每页 ${val} 条`)
       },
       handleCurrentChange (val) {
-        // console.log(`当前页: ${val}`)
+        console.log(`当前页: ${val}`)
         var url = this.$parent.actionUrl
-        if (val === undefined) {
-          console.log('初始化分页数据')
-        } else {
-          if (val % 2 === 1) {
-            url = 'table.json'
-          } else {
-            url = 'table2.json'
-          }
-        }
-        api.getDate(url, (error, res) => {
+        api.getDate(url, {'pageIndex': val}, (error, res) => {
           if (error) {
             console.log(error)
           } else {

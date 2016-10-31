@@ -19,7 +19,7 @@ const routerConfig = [{
   component: User,
   children: [
     {
-      path: 'index', component: require('./components/user/index')
+      path: 'index', component: (resolve) => require(['./components/user/index'], resolve) // 这种方式是按需加载
     },
     {
       path: 'add', component: require('./components/user/add')
@@ -28,6 +28,9 @@ const routerConfig = [{
 }, {
   path: '/foo',
   component: require('./components/foo/index')
+}, {
+  path: '/login',
+  component: require('./views/login')
 }, {
   path: '*',
   component: require('./components/index')
