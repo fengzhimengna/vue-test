@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import breadcrumb from './components/common/breadcrumb.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,16 @@ router.afterEach(route => {
       document.body.scrollTop = indexScrollTop
     })
   }
+  // 更改面包屑导航
+  breadcrumb.breadcrumbs = [
+    {
+      'name': '首页'
+    },
+    {
+      'name': '列表3'
+    }
+  ]
+  console.log(breadcrumb.breadcrumbs)
 })
 
 export default router

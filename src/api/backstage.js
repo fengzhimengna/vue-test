@@ -4,6 +4,7 @@ const basePath = '/static'
 // const basePath = 'https://api.github.com/users/github'
 
 export default {
+  // 获取表格数据
   getDate (url, data, callback) {
     reqwest({
       url: url,
@@ -14,10 +15,33 @@ export default {
       .then(val => callback(null, JSON.parse(val)))
       .catch(e => callback(e))
   },
+  // 获取菜单数据
   getMenu (url, callback) {
     reqwest({
       url: `${basePath}/${url}`,
       crossOrigin: true
+    })
+      .then(val => callback(null, val))
+      .catch(e => callback(e))
+  },
+  // 获取实体详情
+  getEntity (url, params, callback) {
+    reqwest({
+      url: 'http://localhost:8080/user/get.do',
+      crossOrigin: true,
+      method: 'post',
+      data: params
+    })
+      .then(val => callback(null, JSON.parse(val).entity))
+      .catch(e => callback(e))
+  },
+  // 保存实体
+  saveEntity (url, params, callback) {
+    reqwest({
+      url: 'http://localhost:8080/user/save.do',
+      crossOrigin: true,
+      method: 'post',
+      data: params
     })
       .then(val => callback(null, val))
       .catch(e => callback(e))

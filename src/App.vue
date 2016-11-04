@@ -30,7 +30,7 @@ body{
   color: #2c3e50;
   width: 100%;
   margin-top: 0px;
-  position: relative;
+  position: inherit;
 }
 
 

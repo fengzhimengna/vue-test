@@ -10,12 +10,30 @@
 </template>
 
 <script>
-  import api from '../../api/backstage'
+  import commonUtil from '../../util/common'
   export default {
     data () {
       return {
         totalCount: 0,
-        currentPage: 0
+        currentPage: 1,
+        isSearch: false
+      }
+    },
+    props: {
+      conditions: {
+        type: Object
+      },
+      isChange: {
+        type: Boolean
+      },
+      actionUrl: {
+        type: String
+      }
+    },
+    watch: {
+      isChange (val) {
+        this.currentPage = 1
+        this.handleCurrentChange(1)
       }
     },
     created () {
@@ -27,16 +45,11 @@
       },
       handleCurrentChange (val) {
         console.log(`当前页: ${val}`)
-        var url = this.$parent.actionUrl
-        api.getDate(url, {'pageIndex': val}, (error, res) => {
-          if (error) {
-            console.log(error)
-          } else {
-            this.$parent.tableData = res.dataList
-            this.totalCount = res.totalCount
-          }
-          // console.log('next page')
-        })
+        this.conditions.pageIndex = val
+        var url = this.actionUrl
+        var params = commonUtil.getExceptNull(this.conditions)
+        console.log(params)
+        commonUtil.getDataByApi(url, params, this.$parent, this)
       }
     }
   }
