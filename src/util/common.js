@@ -9,7 +9,7 @@ export default {
     var res = {}
     for (var key in obj) {
       if (obj[key] != null) {
-        console.log(obj[key].toString().length)
+        // console.log(obj[key].toString().length)
         if (obj[key].toString().length > 0) {
           res[key] = obj[key]
         }

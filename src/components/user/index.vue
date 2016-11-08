@@ -49,8 +49,8 @@
         <el-button type="text" size="small" @click.native="edit(row.id)">编辑</el-button>
       </el-table-column>
     </el-table>
-    <div style="margin-top:10px;margin-bottom:10px;">
-      <pagination :conditions="query" :isChange="isChange" :actionUrl="actionUrl"/>
+    <div style="margin-top:10px;margin-bottom:10px;" id="pageDiv">
+      <component :is="currentView" :conditions="query" :isChange="isChange" :actionUrl="actionUrl"></component>
     </div>
   </div>
 </template>
@@ -80,6 +80,7 @@ export default {
       isChange: false,
       tableData: [], // 必须项
       error: null,
+      currentView: pagination,
       actionUrl: 'http://localhost:8080/user/list.do' // 必须项
     }
   },
@@ -103,6 +104,7 @@ export default {
     onSubmit () {
       // commonUtil.getDataByApi(this.actionUrl, this.query, this, pagination)
       this.isChange = !this.isChange
+      // this.currentView = pagination
     }
   }
 }

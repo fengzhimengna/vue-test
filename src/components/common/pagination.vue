@@ -15,7 +15,7 @@
     data () {
       return {
         totalCount: 0,
-        currentPage: 1,
+        currentPage: 0,
         isSearch: false
       }
     },
@@ -32,7 +32,6 @@
     },
     watch: {
       isChange (val) {
-        this.currentPage = 1
         this.handleCurrentChange(1)
       }
     },
@@ -48,8 +47,8 @@
         this.conditions.pageIndex = val
         var url = this.actionUrl
         var params = commonUtil.getExceptNull(this.conditions)
-        console.log(params)
         commonUtil.getDataByApi(url, params, this.$parent, this)
+        this.currentPage = val
       }
     }
   }

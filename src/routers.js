@@ -70,7 +70,7 @@ router.afterEach(route => {
       'name': '列表3'
     }
   ]
-  console.log(breadcrumb.breadcrumbs)
+  // console.log(breadcrumb.breadcrumbs)
 })
 
 export default router
