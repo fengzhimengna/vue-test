@@ -18,7 +18,7 @@
     </div>
     <div id="main">
       <div style="margin: 10px">
-        <breadcrumb></breadcrumb>
+        <breadcrumb />
       </div>
       <div class="demo-block demo-box demo-form">
         <div class="source">

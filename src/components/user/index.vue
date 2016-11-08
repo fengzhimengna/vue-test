@@ -50,7 +50,7 @@
       </el-table-column>
     </el-table>
     <div style="margin-top:10px;margin-bottom:10px;" id="pageDiv">
-      <component :is="currentView" :conditions="query" :isChange="isChange" :actionUrl="actionUrl"></component>
+      <component :is="currentView" :conditions="query" :paged="paged" :actionUrl="actionUrl"></component>
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@ export default {
         pageIndex: 1
       },
       conditions: null,
-      isChange: false,
+      paged: false,
       tableData: [], // 必须项
       error: null,
       currentView: pagination,
@@ -102,9 +102,8 @@ export default {
       router.push({path: '/user/add', query: { id: id }})
     },
     onSubmit () {
-      // commonUtil.getDataByApi(this.actionUrl, this.query, this, pagination)
-      this.isChange = !this.isChange
-      // this.currentView = pagination
+      // 触发翻页
+      this.paged = !this.paged
     }
   }
 }

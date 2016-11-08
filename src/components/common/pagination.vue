@@ -23,7 +23,7 @@
       conditions: {
         type: Object
       },
-      isChange: {
+      paged: {
         type: Boolean
       },
       actionUrl: {
@@ -31,7 +31,7 @@
       }
     },
     watch: {
-      isChange (val) {
+      paged (val) {
         this.handleCurrentChange(1)
       }
     },

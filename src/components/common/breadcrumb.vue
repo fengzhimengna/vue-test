@@ -18,15 +18,6 @@
           }
         ]
       }
-    },
-    watch: {
-      breadcrumbs: {
-        handler: (val, oldVal) => {
-          console.log(val, oldVal)
-        },
-        // 深度观察
-        deep: true
-      }
     }
   }
 </script>
