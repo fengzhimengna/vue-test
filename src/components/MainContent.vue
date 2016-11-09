@@ -1,10 +1,11 @@
 <template>
-  <div >
+  <div id="mainContent">
     <div id="header">
       <img src="../assets/logo2.png">
       <h2>华泰德丰后台内容管理系统
-        <span style="float:right;margin-right:10px;"> <router-link to="/login" style="color: #ffffff">登录</router-link>
-        <button @click="setLoginName">设置用户名</button>您好，{{username}}</span>
+        <span style="float:right;margin-right:10px;">
+          <profile></profile>
+        </span>
       </h2>
     </div>
     <div id="nav">
@@ -32,51 +33,39 @@
 </template>
 
 <script>
-  import api from '../api/backstage'
-  import {setUsername} from '../vuex/actions/user_actions'
-  import breadcrumb from './common/breadcrumb'
+import api from '../api/backstage'
+import breadcrumb from './common/breadcrumb'
+import profile from './common/profile.vue'
 
-  export default {
-    vuex: {
-      getters: {
-        loginName: (userInfo) => { return userInfo.loginName }
-      },
-      actions: {
-        setUsername
-      }
-    },
-    components: {
-      breadcrumb
-    },
-    data () {
-      return {
-        menuList: [],
-        error: null,
-        username: null
-      }
-    },
-    created () {
-      this.fetchData()
-    },
-    methods: {
-      fetchData () {
-        this.error = null
-        this.loading = true
-        api.getMenu('menu.json', (error, data) => {
-          if (error) {
-            console.log(error)
-          } else {
-            this.username = 'admin'
-            this.menuList = data
-          }
-        })
-      },
-      setLoginName () {
-        this.setUsername()
-      }
+export default {
+  name: 'mainContent',
+  components: {
+    breadcrumb,
+    profile
+  },
+  data () {
+    return {
+      menuList: [],
+      error: null
+    }
+  },
+  created () {
+    this.fetchData()
+  },
+  methods: {
+    fetchData () {
+      this.error = null
+      this.loading = true
+      api.getMenu('menu.json', (error, data) => {
+        if (error) {
+          console.log(error)
+        } else {
+          this.menuList = data
+        }
+      })
     }
   }
-
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

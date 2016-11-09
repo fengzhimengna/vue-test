@@ -1,19 +1,19 @@
 <template>
   <div id="cms">
-
-    <main-content></main-content>
+    <div class="demo-block demo-box demo-form">
+      <div class="source">
+        <transition name="fade" mode="out-in">
+          <router-view class="view"></router-view>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import MainContent from './components/MainContent'
-
-export default {
-  name: 'cms',
-  components: {
-    MainContent
+  export default {
+    name: 'cms'
   }
-}
 </script>
 
 <style>

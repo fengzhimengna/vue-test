@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import breadcrumb from './components/common/breadcrumb.vue'
+import store from './vuex/store'
+import Main from './components/maincontent.vue'
 
 Vue.use(VueRouter)
 
@@ -12,30 +14,39 @@ const User = {
   `
 }
 
-const routerConfig = [{
-  path: '/',
-  component: require('./components/index')
-}, {
-  path: '/user',
-  component: User,
-  children: [
-    {
-      path: 'index', component: (resolve) => require(['./components/user/index'], resolve) // 这种方式是按需加载
-    },
-    {
-      path: 'add', component: require('./components/user/add')
-    }
-  ]
-}, {
-  path: '/foo',
-  component: require('./components/foo/index')
-}, {
-  path: '/login',
-  component: require('./views/login')
-}, {
-  path: '*',
-  component: require('./components/index')
-}]
+const routerConfig = [
+  {
+    path: '/login',
+    component: require('./components/login')
+  }, {
+    path: '/',
+    component: Main,
+    children: [
+      {
+        path: 'home', component: (resolve) => require(['./components/home'], resolve) // 这种方式是按需加载
+      }, {
+        path: '/foo',
+        component: require('./components/foo/index')
+      }, {
+        path: '/bar',
+        component: require('./components/bar/index')
+      }, {
+        path: '/user',
+        component: User,
+        children: [
+          {
+            path: 'index', component: (resolve) => require(['./components/user/index'], resolve) // 这种方式是按需加载
+          },
+          {
+            path: 'add', component: require('./components/user/add')
+          }
+        ]
+      }
+    ]
+  }, {
+    path: '*',
+    component: require('./components/home')
+  }]
 
 const router = new VueRouter({
   mode: 'history',
@@ -45,12 +56,20 @@ const router = new VueRouter({
 })
 
 let indexScrollTop = 0
-router.beforeEach((route, redirect, next) => {
-  if (route.path !== '/') {
-    indexScrollTop = document.body.scrollTop
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next()
+  } else {
+    if (store.getters.getApp.length === 0) {
+      next('/login')
+    } else {
+      if (to.path !== '/') {
+        indexScrollTop = document.body.scrollTop
+      }
+      document.title = to.meta.title || document.title
+      next()
+    }
   }
-  document.title = route.meta.title || document.title
-  next()
 })
 
 router.afterEach(route => {
