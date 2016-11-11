@@ -45,5 +45,16 @@ export default {
     })
       .then(val => callback(null, val))
       .catch(e => callback(e))
+  },
+  // 登录
+  doLogin (username, password, callback) {
+    reqwest({
+      url: 'http://localhost:8080/login.do',
+      crossOrigin: true,
+      method: 'post',
+      data: {username: username, password: password}
+    })
+      .then(val => callback(null, val))
+      .catch(e => callback(e))
   }
 }
