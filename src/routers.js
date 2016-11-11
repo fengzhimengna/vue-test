@@ -61,7 +61,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (store.getters.getApp.length === 0) {
-      next('/login')
+      window.document.location.href = 'http://localhost:8079/security/login.do'
     } else {
       if (to.path !== '/') {
         indexScrollTop = document.body.scrollTop

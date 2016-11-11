@@ -27,7 +27,10 @@
     },
     methods: {
       doLogin () {
-        api.doLogin(this.username, this.password, (error, data) => {
+        this.$store.dispatch('setApp', this.username)
+        this.$router.push('/home')
+        console.log(api)
+        /* api.doLogin(this.username, this.password, (error, data) => {
           if (error) {
             console.log(error)
           } else {
@@ -35,7 +38,7 @@
             this.$store.dispatch('setApp', this.username)
             this.$router.push('/home')
           }
-        })
+        }) */
       }
     }
   }

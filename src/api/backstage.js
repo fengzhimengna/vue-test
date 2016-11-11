@@ -49,7 +49,7 @@ export default {
   // 登录
   doLogin (username, password, callback) {
     reqwest({
-      url: 'http://localhost:8079/login.do',
+      url: 'http://localhost:8079/security/login2.do',
       crossOrigin: true,
       method: 'post',
       data: {username: username, password: password}
